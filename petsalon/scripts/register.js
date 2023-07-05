@@ -84,6 +84,16 @@ function isValid(aPet){
         inputService.classList.remove("is-valid");
     }
 
+    if(aPet.type === ""){
+        isValid = false;
+        
+        inputType.classList.remove("is-valid");
+        inputType.classList.add("is-invalid");
+    }else{
+        inputType.classList.remove("is-invalid");
+        inputType.classList.remove("is-valid");
+    }
+
     return isValid
 }
 
@@ -105,41 +115,15 @@ function register(){
         alert("Pet registered successfully!");
         displayNumberPets();
         displayCards();
+        displayTable();
         clearForm();
     }
-}
-
-//Function to display pet names
-function displayPetNames() {
-    let div = document.getElementById("petNames");
-
-    div.innerHTML = "";
-
-    for(let i = 0; i < petSalon.pets.length; i++){
-        div.innerHTML += `<p>Pet Name: ${petSalon.pets[i].name}</p>`
-    }
-}
-
-//Function to display number of registered pets
-function displayNumberPets() {
-    let div = document.getElementById("petNumber");
-
-    div.innerHTML = `<p>Number of pets: ${petSalon.pets.length}</p>`;
-}
-
-//Functino to display petSalon Information
-function displaySalonInfo(){
-    let div = document.getElementById("salonInfo")
-
-    div.innerHTML = ""
-    div.innerHTML += `<p>Welcome to ${petSalon.name}`
-    div.innerHTML += `<p>Phone number: ${petSalon.phone}</p>`
 }
 
 function init(){
     //Dummy data initialization
     let Scooby = new Pet("Scooby", 36, "male", "Dane", "Nails", "Dog")
-    let Scrappy = new Pet("Scrappy", 36, "male", "Mixed", "Nails", "Dog")
+    let Scrappy = new Pet("Scrappy", 36, "male", "Mixed", "Nails", "Cat")
 
     petSalon.pets.push(Scooby, Scrappy)
 
@@ -151,6 +135,7 @@ function init(){
     //displayPetNames();
     displayNumberPets();
     displayCards();
+    displayTable();
 }
 
 window.onload = init;
