@@ -103,10 +103,11 @@ function displayTable(){
             <td>${pet.gender}</td>
             <td>${pet.breed}</td>
             <td>${pet.service}</td>
+            <td>${pet.contact}</td>
             <td>
                 <div class="flex">
-                    <button onclick="deletePet(event)" class="btn-primary">Delete</button>
-                    <button onclick="editPetInformation(event)" class="btn-primary">Edit</button>
+                    <button onclick="deletePet(${pet.id})" class="btn-primary"><i class="fa-sharp fa-solid fa-trash"></i></button>
+                    <button onclick="editPetInformation(${pet.id})" class="btn-primary"><i class="fa-solid fa-pen-to-square"></i></button>
                 </div>
             </td>
         </tr>
@@ -116,17 +117,17 @@ function displayTable(){
     table.innerHTML = temp;
 }
 
-function deletePet(event){
+function deletePet(id){
 
-    const index = event.target.parentNode.parentNode.parentNode.id;
-    petSalon.pets.splice(index, 1)
+    petSalon.pets = petSalon.pets.filter(pet => pet.id !== id)
 
     displayCards();
     displayNumberPets();
     displayTable();
 }
 
-function editPetInformation(event){
-    const index = event.target.parentNode.parentNode.parentNode.id;
-    let pet = petSalon.pets[index];
+function editPetInformation(id){
+    const pet = petSalon.pets.find(pet => pet.id === id)
+
+    console.log(pet)
 }

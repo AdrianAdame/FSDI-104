@@ -13,21 +13,27 @@ let petSalon = {
     pets : []
 }
 
+let c = 0;
 let inputType = document.getElementById("txtType");
 let inputName = document.getElementById("txtName");
 let inputAge = document.getElementById("txtAge");
 let inputGender= document.getElementById("txtGender");
 let inputBreed = document.getElementById("txtBreed");
 let inputService = document.getElementById("txtService");
+let inputContact = document.getElementById("txtContact");
 
 
-function Pet(name, age, gender, breed, service, type){
+function Pet(name, age, gender, breed, service, type, contact){
+
     this.name = name;
     this.age = age;
     this.gender = gender;
     this.breed = breed;
     this.service = service;
     this.type = type;
+    this.contact = contact
+
+    this.id = c++;
 }
 
 //Function to validate pet parameters
@@ -94,6 +100,16 @@ function isValid(aPet){
         inputType.classList.remove("is-valid");
     }
 
+    if(aPet.contact === ""){
+        isValid = false;
+        
+        inputContact.classList.remove("is-valid");
+        inputContact.classList.add("is-invalid");
+    }else{
+        inputContact.classList.remove("is-invalid");
+        inputContact.classList.remove("is-valid");
+    }
+
     return isValid
 }
 
@@ -108,7 +124,7 @@ function clearForm(){
 
 //Function to register a pet into the array
 function register(){
-    let pet = new Pet(inputName.value, inputAge.value, inputGender.value, inputBreed.value, inputService.value, inputType.value);
+    let pet = new Pet(inputName.value, inputAge.value, inputGender.value, inputBreed.value, inputService.value, inputType.value, inputContact.value);
 
     if(isValid(pet)){
         petSalon.pets.push(pet);
@@ -122,8 +138,8 @@ function register(){
 
 function init(){
     //Dummy data initialization
-    let Scooby = new Pet("Scooby", 36, "male", "Dane", "Nails", "Dog")
-    let Scrappy = new Pet("Scrappy", 36, "male", "Mixed", "Nails", "Cat")
+    let Scooby = new Pet("Scooby", 36, "male", "Dane", "Nails", "Dog", "6645716362")
+    let Scrappy = new Pet("Scrappy", 36, "male", "Mixed", "Nails", "Cat", "6645716362")
 
     petSalon.pets.push(Scooby, Scrappy)
 
